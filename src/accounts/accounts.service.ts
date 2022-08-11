@@ -48,4 +48,19 @@ export class AccountsService {
       .exec();
     return deletedAccount;
   }
+
+  async getAccountWithCurrentBalance(email: string) {
+    const accounts = await this.accountModel.find({ userEmail: email }).exec();
+    const account = accounts[0];
+
+    const transactions = await this.transactionsService.filterByEmail(email);
+    let amount = 0;
+    transactions.forEach((transaction) => {
+      transaction.type === 'receive'
+        ? (amount += transaction.amount)
+        : (amount -= transaction.amount);
+    });
+
+    return { ...account.toObject(), amount };
+  }
 }

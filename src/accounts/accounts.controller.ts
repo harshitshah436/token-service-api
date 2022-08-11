@@ -45,4 +45,11 @@ export class AccountsController {
   async delete(@Param() params: FindOneParams) {
     return this.accountsService.delete(params.email);
   }
+
+  @Get(':email/balance')
+  async getAccountWithCurrentBalance(
+    @Param() params: FindOneParams,
+  ): Promise<any> {
+    return this.accountsService.getAccountWithCurrentBalance(params.email);
+  }
 }
