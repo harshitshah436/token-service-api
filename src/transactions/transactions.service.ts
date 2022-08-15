@@ -1,5 +1,7 @@
 import {
   forwardRef,
+  HttpException,
+  HttpStatus,
   Inject,
   Injectable,
 } from '@nestjs/common';
@@ -22,6 +24,39 @@ export class TransactionsService {
   async create(
     createTransactionDto: CreateTransactionDto,
   ): Promise<Transaction> {
+    const account = await this.accountsService.filterByEmail(
+      createTransactionDto.userEmail,
+    );
+
+    if (!account) {
+      throw new HttpException(
+        `Account with the email: ${createTransactionDto.userEmail} doesn't exist`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    if (account.status === 'locked') {
+      throw new HttpException(
+        `Account with the email: ${createTransactionDto.userEmail} is locked. No transactions can be made for accounts in locked status`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    // Assumption: all `receive` or `send` token/transaction amount is positive
+    if (createTransactionDto.type === 'send') {
+      const currentAccountBalance =
+        await this.accountsService.getAccountWithCurrentBalance(
+          createTransactionDto.userEmail,
+        );
+
+      if (currentAccountBalance.amount - createTransactionDto.amount < 0) {
+        throw new HttpException(
+          `Account with the email: ${createTransactionDto.userEmail} can not have a negative balance. The max tokesn you can send is: ${currentAccountBalance.amount}`,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+
     const createdTransaction = await this.transactionModel.create(
       createTransactionDto,
     );
