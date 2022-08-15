@@ -26,7 +26,7 @@ export class TransactionsController {
     }),
   )
   async create(@Body() createTransactionDto: CreateTransactionDto) {
-    await this.transactionsService.create(createTransactionDto);
+    return this.transactionsService.create(createTransactionDto);
   }
 
   @Get()

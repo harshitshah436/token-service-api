@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { UpdateResult } from 'mongodb';
 import { Model } from 'mongoose';
@@ -9,7 +9,7 @@ import { Account, AccountDocument } from './schemas/account.schema';
 
 @Injectable()
 export class AccountsService {
-  @Inject(TransactionsService)
+  @Inject(forwardRef(() => TransactionsService))
   private readonly transactionsService: TransactionsService;
 
   constructor(
