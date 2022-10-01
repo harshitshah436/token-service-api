@@ -8,7 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { UpdateResult } from 'mongodb';
-import { FindOneParams } from 'src/common/dto/filter-by-email.dto';
+import { FindOneParams } from '../common/dto/filter-by-email.dto';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';

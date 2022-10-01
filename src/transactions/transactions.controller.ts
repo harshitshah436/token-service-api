@@ -11,7 +11,7 @@ import {
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { Transaction } from './schemas/transaction.schema';
-import { FindOneParams } from 'src/common/dto/filter-by-email.dto';
+import { FindOneParams } from '../common/dto/filter-by-email.dto';
 
 @Controller('transactions')
 export class TransactionsController {
