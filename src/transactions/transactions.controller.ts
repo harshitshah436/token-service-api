@@ -17,6 +17,11 @@ import { FindOneParams } from '../common/dto/filter-by-email.dto';
 export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
 
+  @Get()
+  async findAll(): Promise<Transaction[]> {
+    return this.transactionsService.findAll();
+  }
+
   @Post()
   @UsePipes(
     new ValidationPipe({
@@ -27,11 +32,6 @@ export class TransactionsController {
   )
   async create(@Body() createTransactionDto: CreateTransactionDto) {
     return this.transactionsService.create(createTransactionDto);
-  }
-
-  @Get()
-  async findAll(): Promise<Transaction[]> {
-    return this.transactionsService.findAll();
   }
 
   @Get(':email')

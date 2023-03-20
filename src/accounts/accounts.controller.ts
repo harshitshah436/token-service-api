@@ -18,14 +18,14 @@ import { Account } from './schemas/account.schema';
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
-  @Post()
-  async create(@Body() createAccountDto: CreateAccountDto) {
-    await this.accountsService.create(createAccountDto);
-  }
-
   @Get()
   async findAll(): Promise<Account[]> {
     return this.accountsService.findAll();
+  }
+
+  @Post()
+  async create(@Body() createAccountDto: CreateAccountDto) {
+    await this.accountsService.create(createAccountDto);
   }
 
   @Get(':email')

@@ -1,4 +1,4 @@
-import { IsEmail, IsIn, IsDateString } from 'class-validator';
+import { IsEmail, IsIn, IsDateString, IsOptional } from 'class-validator';
 
 export class CreateAccountDto {
   @IsEmail()
@@ -8,8 +8,10 @@ export class CreateAccountDto {
   readonly status: string;
 
   @IsDateString()
-  readonly createdAt: Date;
+  @IsOptional()
+  readonly createdAt?: Date;
 
   @IsDateString()
-  readonly updatedAt: Date;
+  @IsOptional()
+  readonly updatedAt?: Date;
 }
