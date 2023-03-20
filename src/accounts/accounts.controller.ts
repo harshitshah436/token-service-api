@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateResult } from 'mongodb';
 import { FindOneParams } from '../common/dto/filter-by-email.dto';
 import { AccountsService } from './accounts.service';
@@ -14,6 +15,7 @@ import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 import { Account } from './schemas/account.schema';
 
+@ApiTags('accounts')
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
