@@ -7,7 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { UpdateResult } from 'mongodb';
 import { FindOneParams } from '../common/dto/filter-by-email.dto';
 import { AccountsService } from './accounts.service';

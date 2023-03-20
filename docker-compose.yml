@@ -1,0 +1,24 @@
+# version: "3.9"
+services:
+  nestjs:
+    build: .
+    depends_on:
+      - mongo
+    image: token-service-api:latest
+    env_file:
+      - .env
+    ports:
+      - "3001:3001"
+    container_name: token-service-api
+  mongo:
+    image: mongo:latest
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+    volumes:
+      - ".${MONGO_DATA_DIR}:${MONGO_DATA_DIR}"
+    container_name: mongodb
+    expose:
+      - 27017
+    command: "mongod --logpath=${MONGO_LOG_FILE}"
