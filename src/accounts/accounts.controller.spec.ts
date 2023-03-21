@@ -83,7 +83,7 @@ describe('Accounts Controller', () => {
   });
 
   describe('filterByEmail()', () => {
-    it('should return an accounts filtered by email', async () => {
+    it('should return an account filtered by email', async () => {
       expect(
         controller.filterByEmail({ email: mockAccount.userEmail }),
       ).resolves.toEqual(mockAccount);
@@ -113,7 +113,7 @@ describe('Accounts Controller', () => {
   });
 
   describe('getAccountWithCurrentBalancec()', () => {
-    it('should return an account with current balance', async () => {
+    it('should return an account with a current balance', async () => {
       expect(
         controller.getAccountWithCurrentBalance({
           email: mockAccount.userEmail,
